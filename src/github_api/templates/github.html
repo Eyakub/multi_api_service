@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Github</title>
+</head>
+<body>
+    <h2>Github API</h2>
+    <form method="get">
+        <input type="text" name="username">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if search_result %}
+        <p>
+            <strong>{{ search_result.name|default_if_none:search_result.login }}</strong> has
+            has <strong> {{ search_result.public_repos }}</strong> public repos
+        </p>
+    {% else %}
+        <p><em>{{ search_result.message }}</em></p>
+    {% endif %}
+    <p>Rate limit: {{ search_result.rate.remaining }} / {{ search_result.rate.limit }}</p>
+</body>
+</html>
